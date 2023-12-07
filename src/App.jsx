@@ -4,15 +4,17 @@ import MovieList from "./components/MovieList/MovieList";
 import MovieInfo from "./components/MovieInfo/MovieInfo";
 
 function App() {
+  const selectedMovie = {
+    title: "Forrest Gump",
+    runningTime: 142,
+    genre: "Romantic Drama",
+  };
+
   return (
     <div className="App">
       <Header />
       <MovieList />
-      <MovieInfo
-        title="Forrest Gump"
-        runningTime={142}
-        genre="Romantic Drama"
-      />
+      <MovieInfo movieObj={selectedMovie} />
     </div>
   );
 }
