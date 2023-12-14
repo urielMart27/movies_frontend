@@ -16,20 +16,23 @@ const MovieInfo = ({ movieObj }) => {
       setFlixData(response.data);
     } catch (error) {
       console.warn("Error fetching flix data in MovieInfo: ", error);
+      setFlixData(null);
     }
   };
 
   useEffect(() => {
-    fetchFlixData();
+    movieObj && fetchFlixData();
   }, [movieObj]);
 
   return (
     movieObj && (
       <div className="flex-item">
         <h4>{movieObj.title}</h4>
-        <div className="poster-wrapper">
-          <img src={flixData?.poster_url} />
-        </div>
+        {flixData && (
+          <div className="poster-wrapper">
+            <img src={flixData?.poster_url} />
+          </div>
+        )}
         <div>
           <div className="data-item">
             <span>Running Time</span>
@@ -39,10 +42,12 @@ const MovieInfo = ({ movieObj }) => {
             <span>Genre</span>
             <span>{movieObj.genre}</span>
           </div>
-          <div className="data-item">
-            <span>Release Date</span>
-            <span>{flixData?.release_date}</span>
-          </div>
+          {flixData && (
+            <div className="data-item">
+              <span>Release Date</span>
+              <span>{flixData?.release_date}</span>
+            </div>
+          )}
         </div>
       </div>
     )
